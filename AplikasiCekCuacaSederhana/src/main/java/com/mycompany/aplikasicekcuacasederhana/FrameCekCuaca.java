@@ -310,7 +310,24 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFavoritActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritActionPerformed
-            
+        // Ambil kota yang dipilih dari text field
+        String city = textFieldKota.getText();
+
+        if (city.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Masukkan nama kota untuk menyimpan ke favorit!");
+            return;
+        }
+
+        // Cek jika kota belum ada dalam ComboBox
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cmbKotaFavorit.getModel();
+
+        if (model.getIndexOf(city) == -1) {
+            // Jika kota tidak ada, tambahkan ke ComboBox
+            model.addElement(city);
+            JOptionPane.showMessageDialog(this, "Kota berhasil disimpan ke favorit!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Kota sudah ada dalam daftar favorit!");
+        }
     }//GEN-LAST:event_btnFavoritActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
