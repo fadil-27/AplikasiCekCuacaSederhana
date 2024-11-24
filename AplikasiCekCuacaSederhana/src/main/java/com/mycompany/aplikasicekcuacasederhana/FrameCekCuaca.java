@@ -25,7 +25,7 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     public FrameCekCuaca() {
         initComponents();
         favoriteCities = new ArrayList<>();
-        tableModel = (DefaultTableModel) jTable2.getModel(); // Set the table model
+        tableModel = (DefaultTableModel) tblDataCuaca.getModel(); // Set the table model
     }
    
     
@@ -46,12 +46,14 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         hslSuhu = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        hslKelembapan = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        hslCuaca = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        hslKota = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblDataCuaca = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Cek Cuaca Sederhana");
@@ -153,7 +155,7 @@ public class FrameCekCuaca extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setText("Kelembapan :");
+        hslKelembapan.setText("Kelembapan :");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -161,20 +163,20 @@ public class FrameCekCuaca extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addComponent(hslKelembapan, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jLabel2)
+                .addComponent(hslKelembapan)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel3.setText("Cuaca :");
+        hslCuaca.setText("Cuaca :");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -182,15 +184,36 @@ public class FrameCekCuaca extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addComponent(hslCuaca, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jLabel3)
+                .addComponent(hslCuaca)
                 .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        hslKota.setText("kota :");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(hslKota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(hslKota)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -204,32 +227,35 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Cuaca"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblDataCuaca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Suhu", "Kelembapan", "Cuaca"
+                "Suhu", "Kelembapan", "Cuaca", "Kota"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblDataCuaca);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -292,18 +318,24 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFavoritActionPerformed
 
     private void btnCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekCuacaActionPerformed
+       // Mendapatkan nama kota dari input text field
         String city = textFieldKota.getText();
+
+        // Jika nama kota kosong
         if (city.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Masukkan nama kota!");
             return;
         }
 
         try {
-            // URL of the API, replace 'your_api_key_here' with your actual API key
-            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=your_api_key_here";
+            // Ganti 'abcdef1234567890' dengan API key Anda yang valid
+            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=4552261e9da9107b910de8d5fd6793a2";
+
+            // Membuka koneksi HTTP ke OpenWeatherMap API
             HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
             connection.setRequestMethod("GET");
 
+            // Jika response code adalah 200 (berhasil)
             if (connection.getResponseCode() == 200) {
                 StringBuilder response = new StringBuilder();
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -313,19 +345,20 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                     }
                 }
 
-                // Parse the JSON response
+                // Parsing JSON response dari API
                 JSONObject jsonResponse = new JSONObject(response.toString());
                 String temperature = jsonResponse.getJSONObject("main").getDouble("temp") + "°C";
                 String humidity = jsonResponse.getJSONObject("main").getInt("humidity") + "%";
                 String weather = jsonResponse.getJSONArray("weather").getJSONObject(0).getString("main");
 
-                // Update the labels with the weather information
+                // Menampilkan data cuaca pada label
                 hslSuhu.setText("Suhu: " + temperature);
-                jLabel2.setText("Kelembapan: " + humidity);
-                jLabel3.setText("Cuaca: " + weather);
+                hslKelembapan.setText("Kelembapan: " + humidity);
+                hslCuaca.setText("Cuaca: " + weather);
+                hslKota.setText ("Kota: " + city);
 
-                // Add the data to the table
-                tableModel.addRow(new Object[]{temperature, humidity, weather});
+                // Menambahkan data ke dalam tabel
+                tableModel.addRow(new Object[]{temperature, humidity, weather, city});
             } else {
                 JOptionPane.showMessageDialog(this, "Kota tidak ditemukan!");
             }
@@ -376,9 +409,10 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     private javax.swing.JButton btnFavorit;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cmbKotaFavorit;
+    private javax.swing.JLabel hslCuaca;
+    private javax.swing.JLabel hslKelembapan;
+    private javax.swing.JLabel hslKota;
     private javax.swing.JLabel hslSuhu;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -386,10 +420,11 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private java.awt.Label labelFavorit;
     private java.awt.Label labelKota;
+    private javax.swing.JTable tblDataCuaca;
     private java.awt.TextField textFieldKota;
     // End of variables declaration//GEN-END:variables
 
