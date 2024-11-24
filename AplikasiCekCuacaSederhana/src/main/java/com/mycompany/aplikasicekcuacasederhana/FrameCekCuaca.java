@@ -19,10 +19,13 @@ public class FrameCekCuaca extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;  // Model for the weather table
     private ArrayList<String> favoriteCities;  // List to hold favorite cities
+    private final String API_KEY = "4552261e9da9107b910de8d5fd6793a2"; // Ganti dengan API key Anda
+
     
     public FrameCekCuaca() {
         initComponents();
-        
+        favoriteCities = new ArrayList<>();
+        tableModel = (DefaultTableModel) tblDataCuaca.getModel(); // Set the table model
     }
     
      private void initComponents() {
@@ -48,10 +51,10 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         labelKota = new java.awt.Label();
         labelFavorit = new java.awt.Label();
         textFieldKota = new java.awt.TextField();
-        btnCekCuaca = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         btnFavorit = new javax.swing.JButton();
         cmbKotaFavorit = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         hslSuhu = new javax.swing.JLabel();
@@ -75,13 +78,6 @@ public class FrameCekCuaca extends javax.swing.JFrame {
 
         labelFavorit.setText("Daftar Kota Favorit");
 
-        btnCekCuaca.setText("Cek Cuaca");
-        btnCekCuaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCekCuacaActionPerformed(evt);
-            }
-        });
-
         btnSimpan.setText("+ Favorit");
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +89,13 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         btnFavorit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFavoritActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -108,8 +111,8 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFieldKota, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCekCuaca, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
                         .addComponent(btnFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,9 +130,9 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                     .addComponent(labelKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCekCuaca)
                         .addComponent(btnSimpan)
-                        .addComponent(btnFavorit)))
+                        .addComponent(btnFavorit)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,51 +297,6 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
         
-    private void btnCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekCuacaActionPerformed
-        // Periksa apakah input kota kosong
-    String city = textFieldKota.getText();
-    if (city.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Masukkan nama kota!");
-        return;
-    }
-
-    try {
-        // Panggil API OpenWeatherMap
-        String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=your_api_key_here";
-        HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
-        connection.setRequestMethod("GET");
-
-        if (connection.getResponseCode() == 200) {
-            StringBuilder response = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-            }
-
-            // Parse JSON respons API
-            JSONObject jsonResponse = new JSONObject(response.toString());
-            String temperature = jsonResponse.getJSONObject("main").getDouble("temp") + "°C";
-            String humidity = jsonResponse.getJSONObject("main").getInt("humidity") + "%";
-            String weather = jsonResponse.getJSONArray("weather").getJSONObject(0).getString("main");
-
-            // Tambahkan data ke tabel
-            tableModel.addRow(new Object[]{city, temperature, humidity, weather});
-
-            // Tampilkan ke informasi cuaca
-            temperatureLabel.setText("Suhu: " + temperature);
-            humidityLabel.setText("Kelembapan: " + humidity);
-            weatherLabel.setText("Cuaca: " + weather);
-        } else {
-            JOptionPane.showMessageDialog(this, "Kota tidak ditemukan!");
-        }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengambil data cuaca.");
-        ex.printStackTrace();
-    }
-    }//GEN-LAST:event_btnCekCuacaActionPerformed
-
     private void btnFavoritActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritActionPerformed
         // tombol simpan
     }//GEN-LAST:event_btnFavoritActionPerformed
@@ -346,6 +304,50 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // tombol favorit
     }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String city = textFieldKota.getText();
+        if (city.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Masukkan nama kota!");
+            return;
+        }
+
+        try {
+            // URL of the API, replace 'your_api_key_here' with your actual API key
+            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=your_api_key_here";
+            HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+            connection.setRequestMethod("GET");
+
+            if (connection.getResponseCode() == 200) {
+                StringBuilder response = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                }
+
+                // Parse the JSON response
+                JSONObject jsonResponse = new JSONObject(response.toString());
+                String temperature = jsonResponse.getJSONObject("main").getDouble("temp") + "°C";
+                String humidity = jsonResponse.getJSONObject("main").getInt("humidity") + "%";
+                String weather = jsonResponse.getJSONArray("weather").getJSONObject(0).getString("main");
+
+                // Update the labels with the weather information
+                hslSuhu.setText("Suhu: " + temperature);
+                hslKelembapan.setText("Kelembapan: " + humidity);
+                hslCuaca.setText("Cuaca: " + weather);
+
+                // Add the data to the table
+                tableModel.addRow(new Object[]{temperature, humidity, weather});
+            } else {
+                JOptionPane.showMessageDialog(this, "Kota tidak ditemukan!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengambil data cuaca.");
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,13 +385,13 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCekCuaca;
     private javax.swing.JButton btnFavorit;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cmbKotaFavorit;
     private javax.swing.JLabel hslCuaca;
     private javax.swing.JLabel hslKelembapan;
     private javax.swing.JLabel hslSuhu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

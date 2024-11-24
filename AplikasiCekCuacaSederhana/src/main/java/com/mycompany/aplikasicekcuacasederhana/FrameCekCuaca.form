@@ -97,8 +97,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="textFieldKota" min="-2" pref="172" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnCekCuaca" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Component id="btnFavorit" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnSimpan" min="-2" pref="110" max="-2" attributes="0"/>
@@ -121,9 +121,9 @@
                           <Component id="labelKota" min="-2" max="-2" attributes="0"/>
                           <Component id="textFieldKota" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnCekCuaca" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnSimpan" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnFavorit" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -148,14 +148,6 @@
               </Properties>
             </Component>
             <Component class="java.awt.TextField" name="textFieldKota">
-            </Component>
-            <Component class="javax.swing.JButton" name="btnCekCuaca">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cek Cuaca"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCekCuacaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSimpan">
               <Properties>
@@ -182,6 +174,14 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jButton1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
