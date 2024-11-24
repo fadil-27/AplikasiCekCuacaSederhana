@@ -25,22 +25,9 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     public FrameCekCuaca() {
         initComponents();
         favoriteCities = new ArrayList<>();
-        tableModel = (DefaultTableModel) tblDataCuaca.getModel(); // Set the table model
+        tableModel = (DefaultTableModel) jTable2.getModel(); // Set the table model
     }
-    
-     private void initComponents() {
-        // Your existing initialization code remains the same...
-
-        // Add the combo box model to the favorite city drop-down
-        cmbKotaFavorit.setModel(new DefaultComboBoxModel<>(favoriteCities.toArray(new String[0])));
-
-        // Ensure the table has the correct column headers
-        tblDataCuaca.setModel(new DefaultTableModel(
-            new Object [][] {},
-            new String [] {
-                "Suhu", "Kelembapan", "Cuaca"
-            }
-        ));
+   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -51,20 +38,20 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         labelKota = new java.awt.Label();
         labelFavorit = new java.awt.Label();
         textFieldKota = new java.awt.TextField();
+        btnCekCuaca = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         btnFavorit = new javax.swing.JButton();
         cmbKotaFavorit = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         hslSuhu = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        hslKelembapan = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        hslCuaca = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblDataCuaca = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Cek Cuaca Sederhana");
@@ -77,6 +64,13 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         labelKota.setText("Kota :");
 
         labelFavorit.setText("Daftar Kota Favorit");
+
+        btnCekCuaca.setText("Cek Cuaca");
+        btnCekCuaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCekCuacaActionPerformed(evt);
+            }
+        });
 
         btnSimpan.setText("+ Favorit");
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -92,13 +86,6 @@ public class FrameCekCuaca extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -111,8 +98,8 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFieldKota, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
+                        .addComponent(btnCekCuaca, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,9 +117,9 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                     .addComponent(labelKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCekCuaca)
                         .addComponent(btnSimpan)
-                        .addComponent(btnFavorit)
-                        .addComponent(jButton1)))
+                        .addComponent(btnFavorit)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +153,7 @@ public class FrameCekCuaca extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        hslKelembapan.setText("Kelembapan :");
+        jLabel2.setText("Kelembapan :");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -174,20 +161,20 @@ public class FrameCekCuaca extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hslKelembapan, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(hslKelembapan)
+                .addComponent(jLabel2)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        hslCuaca.setText("Cuaca :");
+        jLabel3.setText("Cuaca :");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -195,14 +182,14 @@ public class FrameCekCuaca extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hslCuaca, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(hslCuaca)
+                .addComponent(jLabel3)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -231,7 +218,7 @@ public class FrameCekCuaca extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Cuaca"));
 
-        tblDataCuaca.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -242,7 +229,7 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                 "Suhu", "Kelembapan", "Cuaca"
             }
         ));
-        jScrollPane2.setViewportView(tblDataCuaca);
+        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -296,16 +283,15 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        
-    private void btnFavoritActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritActionPerformed
-        // tombol simpan
-    }//GEN-LAST:event_btnFavoritActionPerformed
-
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // tombol favorit
     }//GEN-LAST:event_btnSimpanActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnFavoritActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritActionPerformed
+        // tombol simpan
+    }//GEN-LAST:event_btnFavoritActionPerformed
+
+    private void btnCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekCuacaActionPerformed
         String city = textFieldKota.getText();
         if (city.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Masukkan nama kota!");
@@ -335,8 +321,8 @@ public class FrameCekCuaca extends javax.swing.JFrame {
 
                 // Update the labels with the weather information
                 hslSuhu.setText("Suhu: " + temperature);
-                hslKelembapan.setText("Kelembapan: " + humidity);
-                hslCuaca.setText("Cuaca: " + weather);
+                jLabel2.setText("Kelembapan: " + humidity);
+                jLabel3.setText("Cuaca: " + weather);
 
                 // Add the data to the table
                 tableModel.addRow(new Object[]{temperature, humidity, weather});
@@ -347,8 +333,9 @@ public class FrameCekCuaca extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengambil data cuaca.");
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCekCuacaActionPerformed
 
+        
     /**
      * @param args the command line arguments
      */
@@ -385,13 +372,13 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCekCuaca;
     private javax.swing.JButton btnFavorit;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cmbKotaFavorit;
-    private javax.swing.JLabel hslCuaca;
-    private javax.swing.JLabel hslKelembapan;
     private javax.swing.JLabel hslSuhu;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -400,9 +387,9 @@ public class FrameCekCuaca extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     private java.awt.Label labelFavorit;
     private java.awt.Label labelKota;
-    private javax.swing.JTable tblDataCuaca;
     private java.awt.TextField textFieldKota;
     // End of variables declaration//GEN-END:variables
 
