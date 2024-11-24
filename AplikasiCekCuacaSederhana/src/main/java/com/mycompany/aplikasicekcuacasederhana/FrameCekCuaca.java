@@ -39,8 +39,8 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         labelFavorit = new java.awt.Label();
         textFieldKota = new java.awt.TextField();
         btnCekCuaca = new javax.swing.JButton();
-        btnSimpan = new javax.swing.JButton();
         btnFavorit = new javax.swing.JButton();
+        btnSimpan = new javax.swing.JButton();
         cmbKotaFavorit = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -74,17 +74,17 @@ public class FrameCekCuaca extends javax.swing.JFrame {
             }
         });
 
-        btnSimpan.setText("+ Favorit");
-        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSimpanActionPerformed(evt);
-            }
-        });
-
-        btnFavorit.setText("Simpan");
+        btnFavorit.setText("+ Favorit");
         btnFavorit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFavoritActionPerformed(evt);
+            }
+        });
+
+        btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
             }
         });
 
@@ -102,9 +102,9 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCekCuaca, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -120,8 +120,8 @@ public class FrameCekCuaca extends javax.swing.JFrame {
                     .addComponent(textFieldKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCekCuaca)
-                        .addComponent(btnSimpan)
-                        .addComponent(btnFavorit)))
+                        .addComponent(btnFavorit)
+                        .addComponent(btnSimpan)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelFavorit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,13 +309,47 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // tombol favorit
-    }//GEN-LAST:event_btnSimpanActionPerformed
-
     private void btnFavoritActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritActionPerformed
-        // tombol simpan
+            
     }//GEN-LAST:event_btnFavoritActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+       // Ambil data dari tabel
+            DefaultTableModel model = (DefaultTableModel) tblDataCuaca.getModel();
+
+            // Cek apakah tabel memiliki data
+            if (model.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Tidak ada data untuk disimpan!");
+                return;
+            }
+
+            // Tentukan lokasi dan nama file untuk menyimpan data (misalnya "data_cuaca.csv")
+            String filePath = "data_cuaca.csv";
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                // Tulis header (kolom tabel) ke dalam file CSV
+                writer.write("Suhu, Kelembapan, Cuaca, Kota");
+                writer.newLine(); // Baris baru
+
+                // Iterasi melalui setiap baris data di tabel
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    // Ambil data dari setiap kolom di baris i
+                    String temperature = model.getValueAt(i, 0).toString();
+                    String humidity = model.getValueAt(i, 1).toString();
+                    String weather = model.getValueAt(i, 2).toString();
+
+                    // Tulis data ke file
+                    writer.write(temperature + ", " + humidity + ", " + weather);
+                    writer.newLine(); // Baris baru
+                }
+
+                JOptionPane.showMessageDialog(this, "Data berhasil disimpan ke file " + filePath);
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan data.");
+                e.printStackTrace();
+            }
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekCuacaActionPerformed
        // Mendapatkan nama kota dari input text field

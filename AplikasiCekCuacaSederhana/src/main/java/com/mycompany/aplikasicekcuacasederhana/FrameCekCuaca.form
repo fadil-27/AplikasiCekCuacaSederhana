@@ -99,9 +99,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnCekCuaca" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnFavorit" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnSimpan" min="-2" pref="110" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnFavorit" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="labelFavorit" min="-2" max="-2" attributes="0"/>
@@ -122,8 +122,8 @@
                           <Component id="textFieldKota" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnCekCuaca" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSimpan" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnFavorit" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSimpan" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -157,20 +157,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCekCuacaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnSimpan">
+            <Component class="javax.swing.JButton" name="btnFavorit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+ Favorit"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSimpanActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFavoritActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnFavorit">
+            <Component class="javax.swing.JButton" name="btnSimpan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Simpan"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFavoritActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSimpanActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbKotaFavorit">
