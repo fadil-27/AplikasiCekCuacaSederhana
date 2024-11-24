@@ -4,10 +4,17 @@
  */
 package com.mycompany.aplikasicekcuacasederhana;
 
-/**
- *
- * @author LENOVO
- */
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 public class FrameCekCuaca extends javax.swing.JFrame {
 
     /**
@@ -59,10 +66,25 @@ public class FrameCekCuaca extends javax.swing.JFrame {
         label2.setText("Daftar Kota Favorit");
 
         jButton1.setText("Cek Cuaca");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("+ Favorit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Simpan");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -260,6 +282,59 @@ public class FrameCekCuaca extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Periksa apakah input kota kosong
+    String city = cityInput.getText();
+    if (city.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Masukkan nama kota!");
+        return;
+    }
+
+    try {
+        // Panggil API OpenWeatherMap
+        String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=your_api_key_here";
+        HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+        connection.setRequestMethod("GET");
+
+        if (connection.getResponseCode() == 200) {
+            StringBuilder response = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+
+            // Parse JSON respons API
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            String temperature = jsonResponse.getJSONObject("main").getDouble("temp") + "°C";
+            String humidity = jsonResponse.getJSONObject("main").getInt("humidity") + "%";
+            String weather = jsonResponse.getJSONArray("weather").getJSONObject(0).getString("main");
+
+            // Tambahkan data ke tabel
+            tableModel.addRow(new Object[]{city, temperature, humidity, weather});
+
+            // Tampilkan ke informasi cuaca
+            temperatureLabel.setText("Suhu: " + temperature);
+            humidityLabel.setText("Kelembapan: " + humidity);
+            weatherLabel.setText("Cuaca: " + weather);
+        } else {
+            JOptionPane.showMessageDialog(this, "Kota tidak ditemukan!");
+        }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengambil data cuaca.");
+        ex.printStackTrace();
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // tombol simpan
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // tombol favorit
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
